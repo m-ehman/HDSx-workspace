@@ -50,6 +50,8 @@ course page walks you through this), then submit your repository link on Canvas.
 
 ```{r}
 summary(patients)
+
+# my first R calculation
 x <- 5
 y <- 5
 x + y
