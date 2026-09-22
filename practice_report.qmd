@@ -1,6 +1,6 @@
 ---
 title: "My First Report"
-author: "Your Name"
+author: "Morgan Ehman"
 format:
   html:
     embed-resources: true
@@ -37,7 +37,20 @@ hist(patients$age,
 ## Your turn
 
 - Add a sentence here describing what you notice in the chart.
+- _I notice that there are fewer practice patients in the 30 to 40 and 70 to 80 age ranges than the 40 to 50, 50 to 60, and 60 to 70 age ranges._ 
+
 - Render again and check that both your sentence and the chart appear.
 
 When you are happy with the result, **commit and sync** your work (the Week 2
 course page walks you through this), then submit your repository link on Canvas.
+
+## My Notes
+
+- **I learned that it takes a long time for Codespaces to load for the first time!** I also learned what a Quarto document is, how to render it in html, and how to save, commit, and push changes to my GitHub respository. 
+
+```{r}
+summary(patients)
+x <- 5
+y <- 5
+x + y
+```
