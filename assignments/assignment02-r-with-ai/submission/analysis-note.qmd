@@ -27,7 +27,9 @@ glimpse(nhanes)
 colSums(is.na(nhanes))
 ```
 
-The data have 105,626 rows and 18 columns. AI NOTE: I used Claude (Opus 5.5) to suggest possible summary analyses. 
+The data have 105,626 rows and 18 columns. Education is missing in 47,251 records, mostly among participants younger than 20, 
+while BMI is missing in 9,356 records.
+AI NOTE: I used Claude (Opus 5.5) to suggest possible summary analyses. 
 It suggested BMI by Education for adults as one option, given Education is only recorded for adults, i.e., 
 individuals aged 20 years or older. On my visual skim, this appeared to be true, but I wanted to verify. 
 
@@ -46,11 +48,13 @@ nhanes |>
   summarise(n = n(), missing_education = sum(is.na(Education)))
 ```
 
+The youngest individual with Education recorded is 20 years old, and all 47,164 non-adults (i.e., individuals with Age < 20) are missing Education.
+
 ## Summarize
 
 AI NOTE: Once I verified that Education is only recorded for adults, I prompted Claude to 
-summarize BMI by Education for adults, note individuals with a BMI >=30, and to show missing values
-instead of dropping them. 
+summarize BMI by Education for adults (individuals 20+), note individuals with a BMI >=30, and 
+to show missing values instead of dropping them. 
 
 ```{r}
 # AI prompt: "Summarize BMI by Education for adults 20+, add a BMI 30+ flag with mutate(),
@@ -75,11 +79,16 @@ education_summary <- adults |>
 education_summary
 ```
 
-College graduates had the lowest mean BMI (27.9) and the lowest share with BMI 30 or higher (29.3%). Adults with some college had the highest mean BMI and proportion of individuals with BMI 30 or higher (29.6 and 40.5%, respectively), slightly above those with high school or less. The NA row holds the 87 adults with no Education recorded. These are unweighted, descriptive summaries pooled across survey cycles; they do not show that education causes differences in BMI.
+Among adults (i.e., individuals who are 20+) with recorded education, college graduates had the lowest mean BMI (27.9) 
+and the lowest share with BMI 30 or higher (29.3%). Adults with some college had the highest mean BMI and proportion of 
+individuals with BMI 30 or higher (29.6 and 40.5%, respectively), slightly above those with high school or less. The NA row 
+holds the 87 adults with no Education recorded. These are unweighted, descriptive summaries pooled across survey cycles; they do 
+not show that education causes differences in BMI.
 
 ## Verify Summary 
 
-AI NOTE: I asked Claude for code to check that the summary table values are correct. The checks recalculate one row by a different route, confirm the NA row, and confirm no adults were lost.
+AI NOTE: I asked Claude for code to check that the summary table values are correct. The checks recalculate one row by a different route, 
+confirm the NA row, and confirm no adults were lost.
 
 ```{r}
 # AI prompt: "Give me code to check that the values in the education summary table are correct."
@@ -102,6 +111,8 @@ sum(is.na(adults$Education))
 sum(education_summary$n) == nrow(adults)
 ```
 
+The summary table values were verified by recalculating the College Grad row, confirming the NA row, and confirming that no adults were lost from the summary. All checks passed.
+
 ## Function
 
 AI NOTE: I asked Claude to suggest a simple function, and provided the original function as an example. 
@@ -123,11 +134,16 @@ describe_numeric <- function(x) {
 }
 
 describe_numeric(adults$BMI)
+describe_numeric(adults$Age)
 ```
+
+The describe_numeric() function summarizes all 58,462 adults aged 20 or older. BMI is missing for 1,162 adults. Among adults with observed BMI, the mean is 29.0 and the standard deviation is 6.87. Age has no missing values, a mean of 50.1, and a standard deviation of 18.2.
+
 
 ## Verify Function
 
-AI NOTE: To verify that the function was working as intended, I asked Claude to provide single lines of code that individually return n, number missing, mean, and SD for BMI, plus a known-answer test.
+AI NOTE: To verify that the function was working as intended, I asked Claude to provide single lines of code 
+that individually return n, number missing, mean, and SD for BMI, plus a known-answer test.
 
 ```{r}
 # AI prompt: "Give me single lines of code that return n, number missing, mean, and SD
@@ -137,12 +153,14 @@ AI NOTE: To verify that the function was working as intended, I asked Claude to 
 # Each line should match describe_numeric(adults$BMI)
 nrow(adults)                    # n (expect 58462)
 sum(is.na(adults$BMI))          # n_missing (expect 1162)
-mean(adults$BMI, na.rm = TRUE)  # mean (expect 29.037, which rounds to 29.04)
+mean(adults$BMI, na.rm = TRUE)  # mean (expect 29.037, which rounds to 29.0)
 sd(adults$BMI, na.rm = TRUE)    # SD (expect 6.865727, which rounds to 6.87)
 
 # Known-answer test on made-up values (expect n = 4, n_missing = 1, mean = 30, SD = 5)
 describe_numeric(c(25, 30, NA, 35))
 ```
+
+The describe_numeric() function was verified by comparing its output for adults$BMI with single-line calculations of n, number missing, mean, and SD. All values matched. A known-answer test on made-up values also passed.
 
 ## Save Output
 
