@@ -1,4 +1,5 @@
-IncomeGroup,n,mean_bmi
-High Income (>3.5),23838,25.926497189361523
-Low Income (<1.3),31395,25.05044401974837
-Middle Income,32414,25.959075399518728
+Education,n,n_missing_bmi,mean_bmi,pct_obese
+College Grad,13319,183,27.9,29.3
+HS or Less,28485,701,29.3,38.4
+Some College,16571,265,29.6,40.5
+NA,87,13,26.4,23
