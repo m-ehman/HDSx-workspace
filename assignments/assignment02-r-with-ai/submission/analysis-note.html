@@ -2296,7 +2296,7 @@ $ WHtR           &lt;dbl&gt; 0.4989083, 0.5632184, 0.4736457, NA, 0.5602916, 0.5
          46961           9415          12979 </code></pre>
 </div>
 </div>
-<p>The data have 105,626 rows and 18 columns. AI NOTE: I used Claude (Opus 5.5) to suggest possible summary analyses. It suggested BMI by Education for adults as one option, given Education is only recorded for adults, i.e., individuals aged 20 years or older. On my visual skim, this appeared to be true, but I wanted to verify.</p>
+<p>The data have 105,626 rows and 18 columns. Education is missing in 47,251 records, mostly among participants younger than 20, while BMI is missing in 9,356 records. AI NOTE: I used Claude (Opus 5.5) to suggest possible summary analyses. It suggested BMI by Education for adults as one option, given Education is only recorded for adults, i.e., individuals aged 20 years or older. On my visual skim, this appeared to be true, but I wanted to verify.</p>
 </section>
 <section id="verify-education-missingness-and-non-adulthood-i.e.-individuals-with-age-20" class="level2">
 <h2 class="anchored" data-anchor-id="verify-education-missingness-and-non-adulthood-i.e.-individuals-with-age-20">Verify education missingness and non-adulthood (i.e., individuals with age &lt; 20)</h2>
@@ -2321,10 +2321,11 @@ $ WHtR           &lt;dbl&gt; 0.4989083, 0.5632184, 0.4736457, NA, 0.5602916, 0.5
 2 TRUE  58462                87</code></pre>
 </div>
 </div>
+<p>The youngest individual with Education recorded is 20 years old, and all 47,164 non-adults (i.e., individuals with Age &lt; 20) are missing Education.</p>
 </section>
 <section id="summarize" class="level2">
 <h2 class="anchored" data-anchor-id="summarize">Summarize</h2>
-<p>AI NOTE: Once I verified that Education is only recorded for adults, I prompted Claude to summarize BMI by Education for adults, note individuals with a BMI &gt;=30, and to show missing values instead of dropping them.</p>
+<p>AI NOTE: Once I verified that Education is only recorded for adults, I prompted Claude to summarize BMI by Education for adults (individuals 20+), note individuals with a BMI &gt;=30, and to show missing values instead of dropping them.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AI prompt: &quot;Summarize BMI by Education for adults 20+, add a BMI 30+ flag with mutate(),</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and show missing BMI in each group instead of dropping it.&quot;</span></span>
@@ -2356,7 +2357,7 @@ $ WHtR           &lt;dbl&gt; 0.4989083, 0.5632184, 0.4736457, NA, 0.5602916, 0.5
 4 &lt;NA&gt;            87            13     26.4      23  </code></pre>
 </div>
 </div>
-<p>College graduates had the lowest mean BMI (27.9) and the lowest share with BMI 30 or higher (29.3%). Adults with some college had the highest mean BMI and proportion of individuals with BMI 30 or higher (29.6 and 40.5%, respectively), slightly above those with high school or less. The NA row holds the 87 adults with no Education recorded. These are unweighted, descriptive summaries pooled across survey cycles; they do not show that education causes differences in BMI.</p>
+<p>Among adults (i.e., individuals who are 20+) with recorded education, college graduates had the lowest mean BMI (27.9) and the lowest share with BMI 30 or higher (29.3%). Adults with some college had the highest mean BMI and proportion of individuals with BMI 30 or higher (29.6 and 40.5%, respectively), slightly above those with high school or less. The NA row holds the 87 adults with no Education recorded. These are unweighted, descriptive summaries pooled across survey cycles; they do not show that education causes differences in BMI.</p>
 </section>
 <section id="verify-summary" class="level2">
 <h2 class="anchored" data-anchor-id="verify-summary">Verify Summary</h2>
@@ -2399,6 +2400,7 @@ $ WHtR           &lt;dbl&gt; 0.4989083, 0.5632184, 0.4736457, NA, 0.5602916, 0.5
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
+<p>The summary table values were verified by recalculating the College Grad row, confirming the NA row, and confirming that no adults were lost from the summary. All checks passed.</p>
 </section>
 <section id="function" class="level2">
 <h2 class="anchored" data-anchor-id="function">Function</h2>
@@ -2425,35 +2427,43 @@ $ WHtR           &lt;dbl&gt; 0.4989083, 0.5632184, 0.4736457, NA, 0.5602916, 0.5
   &lt;int&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
 1 58462      1162  29.0  6.87</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe_numeric</span>(adults<span class="sc">$</span>Age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+      n n_missing  mean    sd
+  &lt;int&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 58462         0  50.1  18.2</code></pre>
 </div>
+</div>
+<p>The describe_numeric() function summarizes all 58,462 adults aged 20 or older. BMI is missing for 1,162 adults. Among adults with observed BMI, the mean is 29.0 and the standard deviation is 6.87. Age has no missing values, a mean of 50.1, and a standard deviation of 18.2.</p>
 </section>
 <section id="verify-function" class="level2">
 <h2 class="anchored" data-anchor-id="verify-function">Verify Function</h2>
 <p>AI NOTE: To verify that the function was working as intended, I asked Claude to provide single lines of code that individually return n, number missing, mean, and SD for BMI, plus a known-answer test.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AI prompt: &quot;Give me single lines of code that return n, number missing, mean, and SD</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for adults$BMI, to compare with describe_numeric().&quot;</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Verified: all four values and the known-answer test matched.</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Each line should match describe_numeric(adults$BMI)</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(adults)                    <span class="co"># n (expect 58462)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AI prompt: &quot;Give me single lines of code that return n, number missing, mean, and SD</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for adults$BMI, to compare with describe_numeric().&quot;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Verified: all four values and the known-answer test matched.</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Each line should match describe_numeric(adults$BMI)</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(adults)                    <span class="co"># n (expect 58462)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 58462</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(adults<span class="sc">$</span>BMI))          <span class="co"># n_missing (expect 1162)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(adults<span class="sc">$</span>BMI))          <span class="co"># n_missing (expect 1162)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1162</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(adults<span class="sc">$</span>BMI, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)  <span class="co"># mean (expect 29.037, which rounds to 29.04)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(adults<span class="sc">$</span>BMI, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)  <span class="co"># mean (expect 29.037, which rounds to 29.0)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 29.037</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(adults<span class="sc">$</span>BMI, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)    <span class="co"># SD (expect 6.865727, which rounds to 6.87)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(adults<span class="sc">$</span>BMI, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)    <span class="co"># SD (expect 6.865727, which rounds to 6.87)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 6.865727</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Known-answer test on made-up values (expect n = 4, n_missing = 1, mean = 30, SD = 5)</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">describe_numeric</span>(<span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="cn">NA</span>, <span class="dv">35</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Known-answer test on made-up values (expect n = 4, n_missing = 1, mean = 30, SD = 5)</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">describe_numeric</span>(<span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="cn">NA</span>, <span class="dv">35</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
       n n_missing  mean    sd
@@ -2461,12 +2471,13 @@ $ WHtR           &lt;dbl&gt; 0.4989083, 0.5632184, 0.4736457, NA, 0.5602916, 0.5
 1     4         1    30     5</code></pre>
 </div>
 </div>
+<p>The describe_numeric() function was verified by comparing its output for adults$BMI with single-line calculations of n, number missing, mean, and SD. All values matched. A known-answer test on made-up values also passed.</p>
 </section>
 <section id="save-output" class="level2">
 <h2 class="anchored" data-anchor-id="save-output">Save Output</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;assignments/assignment02-r-with-ai/submission/output&quot;</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(education_summary, <span class="st">&quot;assignments/assignment02-r-with-ai/submission/output/summary_table.csv&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;assignments/assignment02-r-with-ai/submission/output&quot;</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(education_summary, <span class="st">&quot;assignments/assignment02-r-with-ai/submission/output/summary_table.csv&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="ai-audit-note" class="level2">
