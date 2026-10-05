@@ -1,5 +1,6 @@
 ---
-title: "Assignment 2 Starter Analysis"
+title: "Assignment 2 Analysis: BMI by education among NHANES adults"
+author: Morgan Ehman
 format: html
 ---
 
@@ -26,43 +27,134 @@ glimpse(nhanes)
 colSums(is.na(nhanes))
 ```
 
-## Summarize
+The data have 105,626 rows and 18 columns. AI NOTE: I used Claude (Opus 5.5) to suggest possible summary analyses. 
+It suggested BMI by Education for adults as one option, given Education is only recorded for adults, i.e., 
+individuals aged 20 years or older. On my visual skim, this appeared to be true, but I wanted to verify. 
 
-Replace this example with your own summary if you choose a different question.
+## Verify education missingness and non-adulthood (i.e., individuals with age < 20)
 
 ```{r}
-bmi_summary <- nhanes |>
-  filter(!is.na(BMI), !is.na(IncomeGroup)) |>
-  group_by(IncomeGroup) |>
+# AI prompt: "Give me a line or two of code to check that Education is only recorded for adults."
+# Verified: youngest age with education recorded is 20; all 47,164 non-adults are missing education.
+
+# Check youngest age with education recorded (expect it to be 20)
+min(nhanes$Age[!is.na(nhanes$Education)])
+
+# Check Education missingness between adults and non-adults (expect it to be missing for all non-adults)
+nhanes |>
+  group_by(adult = Age >= 20) |>
+  summarise(n = n(), missing_education = sum(is.na(Education)))
+```
+
+## Summarize
+
+AI NOTE: Once I verified that Education is only recorded for adults, I prompted Claude to 
+summarize BMI by Education for adults, note individuals with a BMI >=30, and to show missing values
+instead of dropping them. 
+
+```{r}
+# AI prompt: "Summarize BMI by Education for adults 20+, add a BMI 30+ flag with mutate(),
+# and show missing BMI in each group instead of dropping it."
+# Verified: College Grad row recalculated separately and matched; NA row matches the
+# 87 adults missing Education; group sizes add up to all adults (see 'Verify Summary' section below).
+
+adults <- nhanes |>
+  filter(Age >= 20)
+
+education_summary <- adults |>
+  mutate(obese = BMI >= 30) |>
+  group_by(Education) |>
   summarise(
-    n = n(),
-    mean_bmi = mean(BMI),
-    .groups = "drop"
+    n             = n(),
+    n_missing_bmi = sum(is.na(BMI)),
+    mean_bmi      = round(mean(BMI, na.rm = TRUE), 1),
+    pct_obese     = round(100 * mean(obese, na.rm = TRUE), 1),
+    .groups       = "drop"
   )
 
-bmi_summary
+education_summary
+```
+
+College graduates had the lowest mean BMI (27.9) and the lowest share with BMI 30 or higher (29.3%). Adults with some college had the highest mean BMI and proportion of individuals with BMI 30 or higher (29.6 and 40.5%, respectively), slightly above those with high school or less. The NA row holds the 87 adults with no Education recorded. These are unweighted, descriptive summaries pooled across survey cycles; they do not show that education causes differences in BMI.
+
+## Verify Summary 
+
+AI NOTE: I asked Claude for code to check that the summary table values are correct. The checks recalculate one row by a different route, confirm the NA row, and confirm no adults were lost.
+
+```{r}
+# AI prompt: "Give me code to check that the values in the education summary table are correct."
+# Verified: every expected value below matched the table.
+
+# Columns used in the summary exist (expect TRUE)
+all(c("Age", "BMI", "Education") %in% names(nhanes))
+
+# Recalculate the College Grad row: subset first, then calculate (compare with row 1)
+college <- adults |> filter(Education == "College Grad")
+ nrow(college)                                          # n (expect 13319)
+ sum(is.na(college$BMI))                                # n_missing_bmi (expect 183)
+ round(mean(college$BMI, na.rm = TRUE), 1)              # mean_bmi (expect 27.9)
+ round(100 * mean(college$BMI >= 30, na.rm = TRUE), 1)  # pct_obese (expect 29.3)
+
+# The NA row is the adults with no education recorded (expect 87)
+sum(is.na(adults$Education))
+
+# Check: no adults lost from the summary (expect TRUE)
+sum(education_summary$n) == nrow(adults)
 ```
 
 ## Function
 
+AI NOTE: I asked Claude to suggest a simple function, and provided the original function as an example. 
+It suggested a function that returns n, number missing, mean and SD for a numeric variable. 
+
 ```{r}
-mean_with_n <- function(x) {
+# AI prompt: "Suggest a simple function that returns n, number missing, mean, and SD
+# for a numeric variable" (with the starter's mean_with_n() as an example).
+# Verified: results for adults$BMI matched single-line calculations; known-answer test
+# on made-up values passed (see 'Verify Function' section below).
+
+describe_numeric <- function(x) {
   tibble(
-    n = sum(!is.na(x)),
-    mean = mean(x, na.rm = TRUE)
+    n         = length(x),
+    n_missing = sum(is.na(x)),
+    mean      = round(mean(x, na.rm = TRUE), 2),
+    sd        = round(sd(x, na.rm = TRUE), 2)
   )
 }
 
-mean_with_n(nhanes$BMI)
+describe_numeric(adults$BMI)
+```
+
+## Verify Function
+
+AI NOTE: To verify that the function was working as intended, I asked Claude to provide single lines of code that individually return n, number missing, mean, and SD for BMI, plus a known-answer test.
+
+```{r}
+# AI prompt: "Give me single lines of code that return n, number missing, mean, and SD
+# for adults$BMI, to compare with describe_numeric()."
+# Verified: all four values and the known-answer test matched.
+
+# Each line should match describe_numeric(adults$BMI)
+nrow(adults)                    # n (expect 58462)
+sum(is.na(adults$BMI))          # n_missing (expect 1162)
+mean(adults$BMI, na.rm = TRUE)  # mean (expect 29.037, which rounds to 29.04)
+sd(adults$BMI, na.rm = TRUE)    # SD (expect 6.865727, which rounds to 6.87)
+
+# Known-answer test on made-up values (expect n = 4, n_missing = 1, mean = 30, SD = 5)
+describe_numeric(c(25, 30, NA, 35))
 ```
 
 ## Save Output
 
 ```{r}
 dir.create("assignments/assignment02-r-with-ai/submission/output", recursive = TRUE, showWarnings = FALSE)
-write_csv(bmi_summary, "assignments/assignment02-r-with-ai/submission/output/summary_table.csv")
+write_csv(education_summary, "assignments/assignment02-r-with-ai/submission/output/summary_table.csv")
 ```
 
 ## AI Audit Note
 
-Add comments explaining which parts were drafted or debugged with AI and how you verified the result.
+I used Claude (Opus 5.5) to map the assignment requirements, suggest a summary question (BMI by Education among adults), 
+and draft the summary table and the describe_numeric() function. I also used Claude to suggest code to verify the summary table and function. 
+I verified all AI suggestions by checking the output and the checks for each. Each AI-assisted chunk has 
+`# AI prompt:` and `# Verified:` comments. Further details are in `ai-use-note.md`.
+
