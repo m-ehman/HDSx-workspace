@@ -30,9 +30,8 @@ and draft the summary table, the describe_numeric() function, and the checks for
 ## What I changed
 I rejected Claude's first draft, which rewrote the data path and added more complicated code than I needed. 
 After that, I instead started from the top of the assignment, and worked through each chunk separately. 
-I asked for an additional verification of Education and missingness. I removed a second function call on WHtR. 
-I asked for a stronger check of the education summary, as the first version only checked column names and 
-row counts, not the table's values.
+I asked for an additional verification of Education and missingness. I asked for a stronger check of the education summary, 
+as the first version only checked column names and row counts, not the table's values.
 
 ## How I verified the result
 I confirmed Education is only recorded for adults before using it. I recalculated the College Grad row separately, 
