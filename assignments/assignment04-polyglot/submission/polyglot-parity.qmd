@@ -59,7 +59,7 @@ r_summary
 ```
 
 Checks for the parity table: rows left after the missingness filter, the number of grouped rows, and the stored rounded values. 
-The tibble above prints only three significant digits, so the last two lines show the full two-decimal values
+The table above prints only three significant digits, so the last two lines show the full two-decimal values.
 
 ```{r}
 #| label: part-a-checks
@@ -69,4 +69,62 @@ r_summary$mean_bmi
 r_summary$sd_bmi
 ```
 
+## Part B: R function
 
+The function wraps the Part A logic so the value and grouping columns are easy to change.
+
+```{r}
+#| label: part-b-function
+summarise_mean_sd <- function(data, value, group1, group2) {
+  data |>
+    filter(!is.na({{ value }}), !is.na({{ group1 }}), !is.na({{ group2 }})) |>
+    group_by({{ group1 }}, {{ group2 }}) |>
+    summarise(
+      n = n(),
+      mean_value = round(mean({{ value }}), 2),
+      sd_value = round(sd({{ value }}), 2),
+      .groups = "drop"
+    ) |>
+    arrange({{ group1 }}, {{ group2 }})
+}
+
+r_function_summary <- summarise_mean_sd(nhanes, BMI, IncomeGroup, Gender)
+r_function_summary
+```
+
+Check that the function reproduces the pipeline: same number of rows, same group labels and same rounded values.
+
+```{r}
+#| label: part-b-check
+nrow(r_function_summary) == nrow(r_summary)
+identical(r_function_summary$IncomeGroup, r_summary$IncomeGroup)
+identical(r_function_summary$Gender, r_summary$Gender)
+identical(r_function_summary$mean_value, r_summary$mean_bmi)
+identical(r_function_summary$sd_value, r_summary$sd_bmi)
+```
+
+All five checks return `TRUE`, so the function reproduces the pipeline.
+
+## R mastery exercises
+
+### Exercise 1: swap the value column
+
+```{r}
+#| label: exercise-1-waist
+summarise_mean_sd(nhanes, Waist, IncomeGroup, Gender)
+```
+
+**Question:** Check that the grouping labels match the BMI summary. Did the row count change? Why might it?
+
+**Answer:** The group labels match the BMI summary, and there are still 6 grouped rows. The count in each group is smaller, though (e.g., 11,397 high-income women instead of 11,743). This is because the function now drops rows missing a waist measurement instead of rows missing BMI, so a slightly different set of people is counted.
+
+### Exercise 2: swap a grouping column
+
+```{r}
+#| label: exercise-2-race
+summarise_mean_sd(nhanes, BMI, Race, Gender)
+```
+
+**Question:** How many grouped rows do you get now, and why?
+
+**Answer:** This gives 10 grouped rows: 5 race groups by 2 genders. Together these groups also cover more people than the BMI summary. Income group is no longer a grouping column, so rows with missing income are no longer dropped.
