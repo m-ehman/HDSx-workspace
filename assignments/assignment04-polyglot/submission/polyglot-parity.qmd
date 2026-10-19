@@ -116,7 +116,9 @@ summarise_mean_sd(nhanes, Waist, IncomeGroup, Gender)
 
 **Question:** Check that the grouping labels match the BMI summary. Did the row count change? Why might it?
 
-**Answer:** The group labels match the BMI summary, and there are still 6 grouped rows. The count in each group is smaller, though (e.g., 11,397 high-income women instead of 11,743). This is because the function now drops rows missing a waist measurement instead of rows missing BMI, so a slightly different set of people is counted.
+**Answer:** The group labels match the BMI summary, and there are still 6 grouped rows. The count in each group 
+is smaller, though (e.g., 11,397 high-income women instead of 11,743). This is because the function now drops rows 
+missing a waist measurement instead of rows missing BMI, so a slightly different set of people is counted.
 
 ### Exercise 2: swap a grouping column
 
@@ -127,4 +129,32 @@ summarise_mean_sd(nhanes, BMI, Race, Gender)
 
 **Question:** How many grouped rows do you get now, and why?
 
-**Answer:** This gives 10 grouped rows: 5 race groups by 2 genders. Together these groups also cover more people than the BMI summary. Income group is no longer a grouping column, so rows with missing income are no longer dropped.
+**Answer:** This gives 10 grouped rows: 5 race groups by 2 genders. Together these groups also cover more people 
+than the BMI summary. Income group is no longer a grouping column, so rows with missing income are no longer dropped.
+
+## Parity check
+
+The table below is read from `parity-table.csv`. It compares the R results in this document with the Python results in `translation.ipynb`.
+
+```{r}
+#| label: parity-table
+read_csv(
+  "assignments/assignment04-polyglot/submission/parity-table.csv",
+  show_col_types = FALSE
+) |>
+  knitr::kable()
+```
+
+R and Python agree on every check in the table. The only difference is display: the R tibble prints 3 significant digits and drops 
+trailing zeros (25.7, 8.2), while pandas shows 25.74 and 8.20; the stored values are the same.
+
+## How to render
+
+From the repository root, run:
+
+```bash
+quarto render assignments/assignment04-polyglot/submission/polyglot-parity.qmd
+```
+
+This writes `polyglot-parity.html` next to this file. To rerun the Python side, open `translation.ipynb` in the same folder, then 
+click Restart and Run All. The notebook calls `helpers.py`, which must stay in the same folder.

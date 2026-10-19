@@ -1,0 +1,7 @@
+metric,r_value,python_value,match,notes
+raw_row_count,105626,105626,yes,"R: nrow(nhanes). Python: load_and_preview() message and nhanes.shape."
+raw_column_count,18,18,yes,"R: ncol(nhanes). Python: nhanes.shape. Same 18 column names in the same order."
+filtered_row_count,87647,87647,yes,"Rows missing BMI, IncomeGroup or Gender are dropped. R: filter(!is.na(...)). Python: dropna(subset=[...])."
+number_of_groups,6,6,yes,"3 income groups by 2 genders. R: nrow(r_summary). Python: len(py_summary)."
+rounded_summary_values,"mean_bmi: 25.74; 26.11; 25.95; 24.05; 26.39; 25.52 | sd_bmi: 7.51; 6.81; 8.65; 7.17; 8.20; 7.22","mean_bmi: 25.74; 26.11; 25.95; 24.05; 26.39; 25.52 | sd_bmi: 7.51; 6.81; 8.65; 7.17; 8.20; 7.22",yes,"Listed in summary row order. The R tibble prints 3 significant digits (25.7) and drops trailing zeros (8.2), so the R values are taken from the full column printouts at the end of Part A."
+group_labels,"High Income (>3.5); Low Income (<1.3); Middle Income / Female; Male","High Income (>3.5); Low Income (<1.3); Middle Income / Female; Male",yes,"Added because README task 8 asks to compare grouping labels. Same labels in the same sort order."
