@@ -1,0 +1,72 @@
+---
+title: "Assignment 4: Polyglot Parity"
+author: "Morgan Ehman"
+date: 2026-10-19
+format: html
+---
+
+## Purpose
+
+This document builds a descriptive BMI summary by income group and gender in R, 
+then checks it against a Python/pandas translation in `translation.ipynb`.
+
+## Load the data
+
+```{r}
+#| label: setup
+#| message: false
+library(tidyverse)
+```
+
+The data path is relative to the repository root. This works at render because `_quarto.yml` sets `execute-dir: project`.
+
+```{r}
+#| label: load-data
+nhanes <- read_csv(
+  "examples/nhanes-equity/data/nhanes_equity_v6.csv",
+  show_col_types = FALSE
+)
+```
+
+## Raw data checks
+
+These match the inspection steps in the Python notebook and will inform `parity-table.csv`.
+
+```{r}
+#| label: raw-checks
+nrow(nhanes)
+ncol(nhanes)
+names(nhanes)
+sum(is.na(nhanes$BMI))
+```
+
+## Part A: R Pipeline
+
+```{r}
+#| label: part-a-pipeline
+r_summary <- nhanes |>
+  filter(!is.na(BMI), !is.na(IncomeGroup), !is.na(Gender)) |>
+  group_by(IncomeGroup, Gender) |>
+  summarise(
+    n = n(),
+    mean_bmi = round(mean(BMI), 2),
+    sd_bmi = round(sd(BMI), 2),
+    .groups = "drop"
+  ) |>
+  arrange(IncomeGroup, Gender)
+
+r_summary
+```
+
+Checks for the parity table: rows left after the missingness filter, the number of grouped rows, and the stored rounded values. 
+The tibble above prints only three significant digits, so the last two lines show the full two-decimal values
+
+```{r}
+#| label: part-a-checks
+nrow(filter(nhanes, !is.na(BMI), !is.na(IncomeGroup), !is.na(Gender)))
+nrow(r_summary)
+r_summary$mean_bmi
+r_summary$sd_bmi
+```
+
+
