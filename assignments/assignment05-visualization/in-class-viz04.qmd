@@ -1,0 +1,81 @@
+---
+title: "In-class practice - Viz04"
+author: "Morgan Ehman"
+date: 2026-10-20
+format: html
+---
+
+## Setup
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)
+```
+
+## Load Data
+
+Reading about failure modes is one thing; seeing them side by side is another. The two figures below use the same summary as the worked example on viz03. The first plot combines failure modes #1 and #2. The second plot is the honest version. (This pair is not the studio plot — the flawed plot you will audit in viz06 has its own problems for you to find.)
+
+```{r}
+
+candidate_paths <- c(
+  "examples/nhanes-equity/data/nhanes_equity_v6.csv",
+  "../../examples/nhanes-equity/data/nhanes_equity_v6.csv"
+)
+data_path <- candidate_paths[file.exists(candidate_paths)][1]
+nhanes <- read_csv(data_path, show_col_types = FALSE)
+
+bmi_by_income_cycle <- nhanes |>
+  filter(!is.na(BMI), !is.na(IncomeGroup), !is.na(Cycle), Age >= 20, Age <= 80) |>
+  group_by(Cycle, IncomeGroup) |>
+  summarise(n = n(), mean_bmi = mean(BMI), .groups = "drop") |>
+  filter(n >= 30)
+```
+
+## Seeing it: a before/after pair
+
+**Before**— truncated axis and causal title. The y-axis starts near the data, so small gaps look dramatic, and the title makes a claim the descriptive summary cannot support
+
+```{r}
+ggplot(
+  bmi_by_income_cycle,
+  aes(x = Cycle, y = mean_bmi, color = IncomeGroup, group = IncomeGroup)
+) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2.5) +
+  scale_color_brewer(palette = "Dark2") +
+  coord_cartesian(ylim = c(27.5, 31.5)) +
+  labs(
+    title = "Income level causes BMI to rise across NHANES cycles",
+    x = "NHANES cycle",
+    y = "Mean BMI",
+    color = "Income group"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "bottom")
+```
+
+**After**— honest scale and descriptive title. Same data, same geometry. The axis starts at 0, the title describes instead of claiming cause, and the caption discloses the exclusions:
+
+```{r}
+ggplot(
+  bmi_by_income_cycle,
+  aes(x = Cycle, y = mean_bmi, color = IncomeGroup, group = IncomeGroup)
+) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2.5) +
+  scale_color_brewer(palette = "Dark2") +
+  expand_limits(y = 0) +
+  labs(
+    title = "Mean BMI by income group across NHANES cycles",
+    subtitle = "Adults age 20-80 in the prepared class dataset; unweighted descriptive summary",
+    x = "NHANES cycle",
+    y = "Mean BMI",
+    color = "Income group",
+    caption = "Records with missing BMI, income, or cycle excluded; groups under n = 30 removed.\nDescriptive only, not a causal or population estimate."
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "bottom")
+```
+

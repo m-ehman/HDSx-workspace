@@ -1,0 +1,71 @@
+---
+title: "In-class practice - Viz02"
+author: "Morgan Ehman"
+date: 2026-10-20
+format: html
+---
+
+## Setup
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)  # AI-EDIT(2026-06-23): tidyverse-default — consolidated core library() calls into library(tidyverse)
+```
+
+## Load Data
+```{r}
+candidate_paths <- c(
+  "examples/nhanes-equity/data/nhanes_equity_v6.csv",
+  "../../examples/nhanes-equity/data/nhanes_equity_v6.csv"
+)
+data_path <- candidate_paths[file.exists(candidate_paths)][1]
+nhanes <- read_csv(data_path, show_col_types = FALSE)
+
+glimpse(nhanes)
+```
+
+## First Plot
+```{r}
+ggplot(nhanes, aes(x = Age, y = Weight)) +
+  geom_point(alpha = 0.2) +
+  labs(
+    title = "Weight by age, NHANES Health Equity classroom dataset",
+    subtitle = "One point per record; unweighted, descriptive only",
+    x = "Age (years)",
+    y = "Weight (kg)"
+  ) +
+  theme_minimal()
+```
+
+
+
+
+
+
+
+# Visual Audit Note
+
+## Plot Question
+
+Write the descriptive question the plot answers.
+
+## Issues Checked
+
+<!-- AI-EDIT(2026-06-11): SS-035 — worked example row added — needs review -->
+The first row is a worked example of the expected shape — replace it with your own issue.
+
+| Issue | Category | Why it matters | Correction |
+|---|---|---|---|
+| *Example: y-axis starts at 22 instead of 0* | *Correctness* | *Exaggerates the BMI gap between groups, suggesting a larger difference than the data show* | *Start the y-axis at 0 (or show the full data range) and state the axis choice in the caption* |
+|  | Correctness |  |  |
+|  | Design |  |  |
+|  | Interpretation |  |  |
+
+## Final Caption
+
+Write the final caption with data source, statistic, exclusions, and limitation.
+
+## AI-Use Check
+
+State what AI helped with and how the code, labels, and claims were verified.
