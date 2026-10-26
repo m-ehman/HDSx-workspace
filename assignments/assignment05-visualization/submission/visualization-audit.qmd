@@ -1,0 +1,39 @@
+---
+title: "Assignment 5: Visualization Audit"
+author: "Morgan Ehman"
+date: 2026-10-26
+format:
+  html:
+    embed-resources: true
+---
+
+## Plot question
+
+What was the mean BMI in each income group across NHANES cycles, among adults aged 20 to 80 in the prepared classroom dataset?
+
+## Setup
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)
+```
+
+## Load the data
+
+Paths are relative to the repository root, because the workspace `_quarto.yml` sets `execute-dir: project`.
+
+```{r}
+# AI prompt (condensed from Claude chat): "Load nhanes_equity_v6.csv in a Quarto file
+#   using a repository-root relative path (our _quarto.yml sets execute-dir: project),
+#   and stop with a clear message if the file is missing."
+# Verified: rendered with no errors; glimpse() shows 105,626 rows and 18 columns,
+#   with BMI, IncomeGroup, Cycle, and Age spelled as used below.
+data_path <- "examples/nhanes-equity/data/nhanes_equity_v6.csv"
+if (!file.exists(data_path)) {
+  stop("Could not find ", data_path, ". Render or run from the repository root.")
+}
+
+nhanes <- read_csv(data_path, show_col_types = FALSE)
+glimpse(nhanes)
+```
