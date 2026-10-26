@@ -37,3 +37,51 @@ if (!file.exists(data_path)) {
 nhanes <- read_csv(data_path, show_col_types = FALSE)
 glimpse(nhanes)
 ```
+
+## Descriptive summary
+
+Adults aged 20 to 80 with a recorded BMI, income group and cycle. 
+Groups with fewer than 30 records are dropped.
+
+```{r}
+bmi_by_income_cycle <- nhanes |>
+  filter(
+    !is.na(BMI),
+    !is.na(IncomeGroup),
+    !is.na(Cycle),
+    Age >= 20,
+    Age <= 80
+  ) |>
+  group_by(Cycle, IncomeGroup) |>
+  summarise(
+    n = n(),
+    mean_bmi = mean(BMI),
+    .groups = "drop"
+  ) |>
+  filter(n >= 30)
+
+bmi_by_income_cycle
+```
+
+## Draft plot
+
+First draft from viz05 Template 1, before auditing.
+
+```{r}
+# AI prompt: "I have a data frame called bmi_by_income_cycle with columns Cycle, IncomeGroup, n 
+#   and mean_bmi. Write a ggplot2 figure with mean_bmi on the y-axis and Cycle on the x-axis, with 
+#   one line per IncomeGroup. The summary is unweighted and descriptive. Do not add a trend line 
+#   or smoothing."
+# Verified: column names match glimpse(); 33 points match the summary table;
+#   no geom_smooth(); no "Removed rows" warning on render.
+draft_plot <- ggplot(
+  bmi_by_income_cycle,
+  aes(x = Cycle, y = mean_bmi, color = IncomeGroup, group = IncomeGroup)
+) +
+  geom_line() +
+  geom_point() +
+  labs(x = "NHANES cycle", y = "Mean BMI", color = "Income group") +
+  theme_minimal()
+
+draft_plot
+```
