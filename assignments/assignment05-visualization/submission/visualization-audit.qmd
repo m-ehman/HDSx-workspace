@@ -69,10 +69,10 @@ bmi_by_income_cycle
 First draft from viz05 Template 1, before auditing.
 
 ```{r}
-# AI prompt: "I have a data frame called bmi_by_income_cycle with columns Cycle, IncomeGroup, n 
-#   and mean_bmi. Write a ggplot2 figure with mean_bmi on the y-axis and Cycle on the x-axis, with 
-#   one line per IncomeGroup. The summary is unweighted and descriptive. Do not add a trend line 
-#   or smoothing."
+# AI prompt (viz05 Template 1 wording; code drafted by Claude in chat): "I have a data frame called 
+#   bmi_by_income_cycle with columns Cycle, IncomeGroup, n and mean_bmi. Write a ggplot2 figure with 
+#   mean_bmi on the y-axis and Cycle on the x-axis, with one line per IncomeGroup. The summary is 
+#   unweighted and descriptive. Do not add a trend line or smoothing."
 # Verified: column names match glimpse(); 33 points match the summary table;
 #   no geom_smooth(); no "Removed rows" warning on render.
 draft_plot <- ggplot(
@@ -162,8 +162,8 @@ ggsave(
 
 ## What the plot shows
 
-<!-- AI prompt (condensed from Claude chat): "Draft a short, non-causal reading of the corrected plot and two paragraphs explaining what I revised from the starter plot and my draft, and why." -->
-<!-- Verified: each number traced to my R checks; text scanned for causal or population wording. -->
+<!-- AI prompt (condensed from Claude chat): "Based on my identified issues and proposed solutions, draft a short, non-causal reading of the corrected plot and two paragraphs explaining what I revised from the starter plot and my draft, and why." -->
+<!-- Verified: matched each number to R output: age range in the starter data (2 to 85); starter vs adult 2021-2023 means (group order reverses); endpoint_cycles (2 of 11 kept); summary table (a dip in each group; Low and Middle cross); adult means above 28 (32 of 33); lowest group per cycle (High in all 11); first vs last cycle (all three rose). Scanned the text for causal or population words. -->
 
 In this classroom dataset, mean BMI among adults aged 20 to 80 was higher in 2021-2023 than in 1999-2000 in all three income groups. The high-income group had the lowest mean in every cycle, while the low- and middle-income groups crossed several times. These are unweighted differences between groups in a classroom snapshot, not effects of income or estimates for the US population. Reaching this reading meant correcting the starter plot in several ways.
 

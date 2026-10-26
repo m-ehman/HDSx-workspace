@@ -2335,10 +2335,10 @@ $ WHtR           &lt;dbl&gt; 0.4989083, 0.5632184, 0.4736457, NA, 0.5602916, 0.5
 <h2 class="anchored" data-anchor-id="draft-plot">Draft plot</h2>
 <p>First draft from viz05 Template 1, before auditing.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AI prompt: &quot;I have a data frame called bmi_by_income_cycle with columns Cycle, IncomeGroup, n </span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   and mean_bmi. Write a ggplot2 figure with mean_bmi on the y-axis and Cycle on the x-axis, with </span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   one line per IncomeGroup. The summary is unweighted and descriptive. Do not add a trend line </span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   or smoothing.&quot;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AI prompt (viz05 Template 1 wording; code drafted by Claude in chat): &quot;I have a data frame called </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   bmi_by_income_cycle with columns Cycle, IncomeGroup, n and mean_bmi. Write a ggplot2 figure with </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   mean_bmi on the y-axis and Cycle on the x-axis, with one line per IncomeGroup. The summary is </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   unweighted and descriptive. Do not add a trend line or smoothing.&quot;</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Verified: column names match glimpse(); 33 points match the summary table;</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   no geom_smooth(); no &quot;Removed rows&quot; warning on render.</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>draft_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
@@ -2442,8 +2442,8 @@ $ WHtR           &lt;dbl&gt; 0.4989083, 0.5632184, 0.4736457, NA, 0.5602916, 0.5
 </section>
 <section id="what-the-plot-shows" class="level2">
 <h2 class="anchored" data-anchor-id="what-the-plot-shows">What the plot shows</h2>
-<!-- AI prompt (condensed from Claude chat): "Draft a short, non-causal reading of the corrected plot and two paragraphs explaining what I revised from the starter plot and my draft, and why." -->
-<!-- Verified: each number traced to my R checks; text scanned for causal or population wording. -->
+<!-- AI prompt (condensed from Claude chat): "Based on my identified issues and proposed solutions, draft a short, non-causal reading of the corrected plot and two paragraphs explaining what I revised from the starter plot and my draft, and why." -->
+<!-- Verified: matched each number to R output: age range in the starter data (2 to 85); starter vs adult 2021-2023 means (group order reverses); endpoint_cycles (2 of 11 kept); summary table (a dip in each group; Low and Middle cross); adult means above 28 (32 of 33); lowest group per cycle (High in all 11); first vs last cycle (all three rose). Scanned the text for causal or population words. -->
 <p>In this classroom dataset, mean BMI among adults aged 20 to 80 was higher in 2021-2023 than in 1999-2000 in all three income groups. The high-income group had the lowest mean in every cycle, while the low- and middle-income groups crossed several times. These are unweighted differences between groups in a classroom snapshot, not effects of income or estimates for the US population. Reaching this reading meant correcting the starter plot in several ways.</p>
 </section>
 <section id="what-i-revised-and-why" class="level2">

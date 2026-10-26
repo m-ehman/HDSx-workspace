@@ -11,16 +11,16 @@ Tool: Claude, in one claude.ai chat. The inline prompts are condensed summaries 
 #   using a repository-root relative path (our _quarto.yml sets execute-dir: project),
 #   and stop with a clear message if the file is missing."
 # Verified: rendered with no errors; glimpse() shows 105,626 rows and 18 columns,
-#   with BMI, IncomeGroup, Cycle and Age spelled as used below.
+#   with BMI, IncomeGroup, Cycle, and Age spelled as used below.
 ```
 
 ### Draft plot chunk
 
 ```r
-# AI prompt (viz05 Template 1 wording; code drafted by Claude in chat): "I have a data frame
-#   bmi_by_income_cycle with columns Cycle, IncomeGroup, n and mean_bmi. Write a
-#   ggplot2 figure with mean_bmi on the y-axis and Cycle on the x-axis, one line per
-#   IncomeGroup. The summary is unweighted and descriptive. No trend line or smoothing."
+# AI prompt (viz05 Template 1 wording; code drafted by Claude in chat): "I have a data frame called 
+#   bmi_by_income_cycle with columns Cycle, IncomeGroup, n and mean_bmi. Write a ggplot2 figure with 
+#   mean_bmi on the y-axis and Cycle on the x-axis, with one line per IncomeGroup. The summary is 
+#   unweighted and descriptive. Do not add a trend line or smoothing."
 # Verified: column names match glimpse(); 33 points match the summary table;
 #   no geom_smooth(); no "Removed rows" warning on render.
 ```
@@ -53,8 +53,8 @@ Tool: Claude, in one claude.ai chat. The inline prompts are condensed summaries 
 ### Revision text ("What the plot shows" and "What I revised and why")
 
 ```html
-<!-- AI prompt (condensed from Claude chat): "Draft a short, non-causal reading of the corrected plot and two paragraphs explaining what I revised from the starter plot and my draft, and why." -->
-<!-- Verified: each number traced to my R checks; text scanned for causal or population wording. -->
+<!-- AI prompt (condensed from Claude chat): "Based on my identified issues and proposed solutions, draft a short, non-causal reading of the corrected plot and two paragraphs explaining what I revised from the starter plot and my draft, and why." -->
+<!-- Verified: matched each number to R output: age range in the starter data (2 to 85); starter vs adult 2021-2023 means (group order reverses); endpoint_cycles (2 of 11 kept); summary table (a dip in each group; Low and Middle cross); adult means above 28 (32 of 33); lowest group per cycle (High in all 11); first vs last cycle (all three rose). Scanned the text for causal or population words. -->
 ```
 
 ### Files without inline comments
@@ -79,7 +79,7 @@ Tool: Claude, in one claude.ai chat. The inline prompts are condensed summaries 
 ## What AI helped with
 
 - **Code:** Claude drafted the data load, draft plot, corrected plot and export chunks. 
-- **Audit and writing:** Claude drafted descriptions of the issues list in `visual-audit-note.md` that I identified. It also drafted the caption, the revision paragraphs, and the M1 link note.
+- **Audit and writing:** I identified six of the starter plot's issues. Claude checked them, added two more (unreported missing records and group sizes; the palette, legend order and legend title), and drafted the issue descriptions and the draft-plot rows. Claude also drafted the caption, the revision paragraphs and the M1 link note.
 
 ## What I changed
 
