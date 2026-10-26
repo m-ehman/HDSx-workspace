@@ -44,6 +44,7 @@ Adults aged 20 to 80 with a recorded BMI, income group and cycle.
 Groups with fewer than 30 records are dropped.
 
 ```{r}
+# Code chunk sourced from: weeks/week06-visualization/viz03-worked-example.html
 bmi_by_income_cycle <- nhanes |>
   filter(
     !is.na(BMI),
