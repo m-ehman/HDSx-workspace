@@ -158,3 +158,16 @@ ggsave(
   bg = "white"
 )
 ```
+
+## What the plot shows
+
+<!-- AI prompt (condensed from Claude chat): "Draft a short, non-causal reading of the corrected plot and two paragraphs explaining what I revised from the starter plot and my draft, and why." -->
+<!-- Verified: each number traced to my R checks; text scanned for causal or population wording. -->
+
+In this classroom dataset, mean BMI among adults aged 20 to 80 was higher in 2021-2023 than in 1999-2000 in all three income groups. The high-income group had the lowest mean in every cycle, while the low- and middle-income groups crossed several times. These are unweighted differences between groups in a classroom snapshot, not effects of income or estimates for the US population. Reaching this reading meant correcting the starter plot in several ways.
+
+## What I revised and why
+
+The starter plot's biggest problems were in its data, so I fixed the summary before any labels. Its subtitle said adults aged 20 to 80, but the code averaged every age from 2 to 85. Adding the age filter reversed the group order: in 2021-2023, low-income adults had the highest mean, not the lowest. The starter also kept only the first and last of 11 cycles and joined them with dashed lines, which hid a dip in every group. I plotted all 11 cycles and replaced the causal title with a descriptive one. Once the data were right, the scale and labels needed work too.
+
+Applied to the corrected data, the starter's y-axis limits of 24 to 28 would have deleted 32 of the 33 adult means, so I removed them and started the axis at 0. I named the statistic and the income measure, ordered the groups from low to high income, and switched to a colour-blind-safe palette. I also replaced the Windows and mis-nested data paths with one path from the repository root. Reviewing my own Template 1 draft caught a zoomed y-axis and a missing caption, which the same fixes resolve. The caption now gives the source, exclusions, group sizes and limits of an unweighted descriptive summary, and `visual-audit-note.md` lists each issue with its audit category.
