@@ -1,0 +1,3 @@
+# M1 Link Note
+
+For our team's Milestone 1 figure of family income-to-poverty ratio (`INDFMPIR`) and PHQ-9 score in NHANES 2021-2023, Assignment 5 (A5) leads me to propose plotting mean PHQ-9 within the same income bands A5 used (under 1.3, 1.3 to 3.49, and 3.5 or more), with the y-axis starting at 0, rather than relying on a fitted trend line through a dense scatter. For the age-stratified figure, we should report the n in each age and income cell and drop or flag cells under 30, so small groups do not look as reliable as large ones. Our caption should also count the adults excluded for missing `INDFMPIR` or incomplete PHQ-9 items, and state that the summary is unweighted and not evidence of cause, as my A5 caption does.
