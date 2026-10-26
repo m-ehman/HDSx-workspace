@@ -75,13 +75,13 @@ Tool: Claude, in one claude.ai chat. The inline prompts are condensed summaries 
 ## What AI helped with
 
 - **Code:** Claude drafted the data load, draft plot, corrected plot and export chunks. 
-- **Audit and writing:** I identified six of the starter plot's issues. Claude checked them, added two more (unreported missing records and group sizes; the palette, legend order and legend title), and drafted the issue descriptions and the draft-plot rows. Claude also drafted the caption, the revision paragraphs and the M1 link note.
+- **Audit and writing:** I identified six of the starter plot's issues. Claude checked them, added two more (unreported missing records and group sizes; the palette, legend order and legend title), and drafted the issue descriptions and the draft-plot rows. Claude also drafted a first draft of the caption, the revision paragraphs, and the M1 link note from my prompting.
 
 ## What I changed
 
-- **Audit wording:** I reviewed and edited Claude’s draft issue descriptions to improve the wording and reflect how I understood the issues and proposed solutions. 
+- **Audit and revision wording:** I reviewed and edited Claude’s draft issue descriptions to improve the wording and reflect how I understood the issues and proposed solutions. I similarly edited its revision paragraphs.
 - **Comparison:** I kept the starter plot's comparison after checking the README, viz06 and viz07, which tie the A5 plot to the studio revision.
-- **Attribution:** I asked Claude where the draft plot code came from and changed its prompt line to show that the wording is from viz05 Template 1 and the code is from Claude.
+- **Attribution:** I changed its prompt line to show that the wording is from viz05 Template 1 and the code is from Claude.
 
 ## How I verified the result
 
