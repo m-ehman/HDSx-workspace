@@ -72,10 +72,6 @@ Tool: Claude, in one claude.ai chat. The inline prompts are condensed summaries 
 
 - Verified: checked that each sentence names something specific to our project and matches our submitted visual plan; rejected a first draft that proposed changing the submitted plan.
 
-**YAML header (`embed-resources: true`)**
-- No prompt: Claude suggested this without being asked, so the HTML would hold its own figures. 
-- Verified: No `visualization-audit_files/` folder was created, and the downloaded HTML shows both plots on its own.
-
 ## What AI helped with
 
 - **Code:** Claude drafted the data load, draft plot, corrected plot and export chunks. 

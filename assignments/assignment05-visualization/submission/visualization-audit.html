@@ -2253,7 +2253,7 @@ vertical-align: -.125em;
 </section>
 <section id="load-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="load-the-data">Load the data</h2>
-<p>Paths are relative to the repository root, because the workspace <code>_quarto.yml</code> sets <code>execute-dir: project</code>.</p>
+<p>This reads the prepared NHANES classroom CSV and prints its columns, so the names used below can be checked against the data.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AI prompt (condensed from Claude chat): &quot;Load nhanes_equity_v6.csv in a Quarto file</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   using a repository-root relative path (our _quarto.yml sets execute-dir: project),</span></span>
@@ -2293,7 +2293,7 @@ $ WHtR           &lt;dbl&gt; 0.4989083, 0.5632184, 0.4736457, NA, 0.5602916, 0.5
 </section>
 <section id="descriptive-summary" class="level2">
 <h2 class="anchored" data-anchor-id="descriptive-summary">Descriptive summary</h2>
-<p>Adults aged 20 to 80 with a recorded BMI, income group and cycle. Groups with fewer than 30 records are dropped.</p>
+<p>This keeps adults aged 20 to 80 with a recorded BMI, income group and cycle, then counts the records and calculates mean BMI for each income group in each cycle. Groups with fewer than 30 records are dropped; every group here has more than 1,000, so none were.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code chunk sourced from: weeks/week06-visualization/viz03-worked-example.html</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bmi_by_income_cycle <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
@@ -2333,7 +2333,7 @@ $ WHtR           &lt;dbl&gt; 0.4989083, 0.5632184, 0.4736457, NA, 0.5602916, 0.5
 </section>
 <section id="draft-plot" class="level2">
 <h2 class="anchored" data-anchor-id="draft-plot">Draft plot</h2>
-<p>First draft from viz05 Template 1, before auditing.</p>
+<p>This is my first draft from the viz05 Template 1 prompt, kept as it was before auditing. It has no title or caption and uses the default axis range and colours; <code>visual-audit-note.md</code> lists its issues.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AI prompt (viz05 Template 1 wording; code drafted by Claude in chat): &quot;I have a data frame called </span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   bmi_by_income_cycle with columns Cycle, IncomeGroup, n and mean_bmi. Write a ggplot2 figure with </span></span>
@@ -2362,6 +2362,7 @@ $ WHtR           &lt;dbl&gt; 0.4989083, 0.5632184, 0.4736457, NA, 0.5602916, 0.5
 </section>
 <section id="corrected-plot" class="level2">
 <h2 class="anchored" data-anchor-id="corrected-plot">Corrected plot</h2>
+<p>This revises the draft to fix the issues in <code>visual-audit-note.md</code>: groups ordered from low to high income, a colour-blind-safe palette, a y-axis starting at 0, and labels that name the statistic and income measure. The caption under the figure gives the source, exclusions, group sizes and limits.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AI prompt (viz05 Template 2 wording plus my audit fixes; code drafted by Claude in chat):</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   &quot;Revise the draft: order IncomeGroup from low to high, with labels naming the</span></span>
@@ -2425,6 +2426,7 @@ $ WHtR           &lt;dbl&gt; 0.4989083, 0.5632184, 0.4736457, NA, 0.5602916, 0.5
 </section>
 <section id="export-the-corrected-plot" class="level2">
 <h2 class="anchored" data-anchor-id="export-the-corrected-plot">Export the corrected plot</h2>
+<p>This saves the corrected plot as <code>corrected-plot.png</code> in the submission folder, so the image comes from code rather than a screenshot.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Source: viz07 ggsave() call, saving corrected_plot instead of last_plot().</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># AI prompt (condensed from Claude chat): &quot;Save corrected_plot to the submission folder</span></span>
