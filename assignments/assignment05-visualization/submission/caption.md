@@ -1,0 +1,3 @@
+# Figure Caption
+
+This figure shows mean BMI by family income-to-poverty ratio group across 11 NHANES cycles, from 1999-2000 to 2021-2023 (the dataset has no 2019-2020 cycle), for adults aged 20 to 80 in the prepared NHANES Health Equity classroom dataset. The summary is descriptive and unweighted. Records missing BMI, income group or cycle were excluded (6,286 of 57,137 adults), leaving 1,089 to 2,088 records per point. The plot supports comparison of patterns, not causal claims or population-level estimates.
