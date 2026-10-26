@@ -85,3 +85,76 @@ draft_plot <- ggplot(
 
 draft_plot
 ```
+
+## Corrected plot
+
+```{r}
+# AI prompt (viz05 Template 2 wording plus my audit fixes; code drafted by Claude in chat):
+#   "Revise the draft: order IncomeGroup from low to high, with labels naming the
+#   income-to-poverty ratio bands; use the Dark2 palette; start the y-axis at 0; add
+#   labs() so the title describes the comparison without a causal claim, the subtitle
+#   states the summary is unweighted for adults 20-80, and the caption gives the source,
+#   exclusions, n range, y-axis choice and the missing 2019-2020 cycle."
+# Verified: count() shows all three groups recoded with 11 cycles each and no NA;
+#   render shows no "Removed rows" warning; points match the summary table; legend
+#   reads Low, Middle, High; y-axis starts at 0; caption n range matches range(n);
+#   brewer.pal.info lists Dark2 as colour-blind safe.
+plot_data <- bmi_by_income_cycle |>
+  mutate(
+    income_group = factor(
+      IncomeGroup,
+      levels = c("Low Income (<1.3)", "Middle Income", "High Income (>3.5)"),
+      labels = c("Low (under 1.3)", "Middle (1.3 to 3.49)", "High (3.5 or more)")
+    )
+  )
+
+n_range <- format(range(plot_data$n), big.mark = ",", trim = TRUE)
+
+corrected_plot <- ggplot(
+  plot_data,
+  aes(x = Cycle, y = mean_bmi, color = income_group, group = income_group)
+) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  scale_color_brewer(palette = "Dark2") +
+  expand_limits(y = 0) +
+  labs(
+    title = "Mean BMI by income group across NHANES cycles",
+    subtitle = "Adults aged 20 to 80; unweighted descriptive summary",
+    x = "NHANES cycle",
+    y = "Mean BMI (kg/m²)",
+    color = "Family income-to-\npoverty ratio",
+    caption = paste0(
+      "Source: prepared NHANES Health Equity classroom dataset (nhanes_equity_v6.csv).\n",
+      "Records missing BMI, income group or cycle are excluded. No 2019-2020 cycle in the dataset.\n",
+      "Each point is a mean of ", n_range[1], " to ", n_range[2], " records. Y-axis starts at 0.\n",
+      "Descriptive only; not a causal or population estimate."
+    )
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title.position = "plot",
+    plot.caption.position = "plot",
+    plot.caption = element_text(hjust = 0)
+  )
+
+corrected_plot
+```
+
+## Export the corrected plot
+
+```{r}
+# Source: viz07 ggsave() call, saving corrected_plot instead of last_plot().
+# AI prompt (condensed from Claude chat): "Save corrected_plot to the submission folder
+#   as in viz07, with a white background so the PNG reads in any viewer."
+# Verified: corrected-plot.png appears in submission/, opens in Open Preview with a
+#   white background, and matches the figure in the rendered HTML.
+ggsave(
+  "assignments/assignment05-visualization/submission/corrected-plot.png",
+  plot = corrected_plot,
+  width = 7,
+  height = 5,
+  bg = "white"
+)
+```
