@@ -81,7 +81,7 @@ Tool: Claude, in one claude.ai chat. The inline prompts are condensed summaries 
 
 - **Audit and revision wording:** I reviewed and edited Claude’s draft issue descriptions to improve the wording and reflect how I understood the issues and proposed solutions. I similarly edited its revision paragraphs.
 - **Comparison:** I kept the starter plot's comparison after checking the README, viz06 and viz07, which tie the A5 plot to the studio revision.
-- **Attribution:** I changed its prompt line to show that the wording is from viz05 Template 1 and the code is from Claude.
+- **M1 link note:** I rejected Claude's first draft, which proposed changing our team's planned scatter plot, and kept a version that applies the A5 standards to the plan as currently conceived.
 
 ## How I verified the result
 
