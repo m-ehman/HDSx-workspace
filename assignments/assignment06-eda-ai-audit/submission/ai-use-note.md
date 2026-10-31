@@ -8,8 +8,9 @@ Tool: Claude, in one claude.ai chat. The load, cohort and missingness code comes
 Load chunk (fallback path only)
 # AI prompt (fallback path only): Adapt the eda03 load code for a file in
 #   assignments/assignment06-eda-ai-audit/submission/, three folders below the repo root.
-# Verified: from the repo root, file.exists() on the fallback path written relative to
-#   submission/ is TRUE; data_path is the repo-root path when run from the root
+# Verified: From the repo root, file.exists() returned TRUE when the fallback
+#   was prefixed with assignments/assignment06-eda-ai-audit/submission/.
+#   The load chunk selected examples/nhanes-equity/data/nhanes_equity_v6.csv.
 
 Complete-case chunk
 # AI prompt: Using `analysis_df` (adults 20-80):
@@ -33,7 +34,7 @@ Table 1 chunk
 
 ## What AI helped with
 
-Claude drafted the two chunks above and the prose in the EDA note, including the methods note, which it adapted from the eda07 template. It also drafted the provenance note from the eda03, eda05 and eda07 templates, the Cohort, Missingness and AI-Use Check sections of the audit note, and a first draft of this note. I identified the seven planted issues myself, and Claude checked them against the code and helped word the audit table.
+Claude drafted the chunks above and the prose in the EDA note, including the methods note, which it adapted from the eda07 template. It also drafted the provenance note from the eda03, eda05 and eda07 templates, the Cohort, Missingness and AI-Use Check sections of the audit note, and a first draft of this note. I identified the seven planted issues myself, and Claude checked them against the code and helped word the audit table.
 
 ## What I changed
 
