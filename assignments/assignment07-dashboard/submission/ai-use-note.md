@@ -2,7 +2,7 @@
 
 ## Audit trail
 
-Tool: Claude, in one claude.ai chat. I shared the A7 brief, excerpts from the Week 8 pages the starter files and my rendered HTML outputs. The prompts below are condensed from that chat.
+Tool: Claude, in one claude.ai chat. I shared the A7 brief, excerpts from the Week 8 pages, the starter code templates, and my rendered HTML outputs. The prompts below are condensed from that chat.
 
 ### Caption in the Visualization chunk (`dashboard.qmd`)
 
@@ -23,7 +23,7 @@ Tool: Claude, in one claude.ai chat. I shared the A7 brief, excerpts from the We
 
 - **`dashboard-adaptation-note.md`**
   - AI prompt (condensed): "Suggest a specific audience and question for the starter dashboard, then draft each template section from my choices and test results."
-  - Verified: the control values and fallback order with `sort(unique(na.omit(nhanes$IncomeGroup)))` in R; the Test Result, Limitation and Privacy Check sections against the separate files.
+  - Verified: the control values and fallback order with `sort(unique(na.omit(nhanes$IncomeGroup)))` in R; the interpretation numbers against my Middle Income render; the Test Result, Limitation and Privacy Check sections against the separate files.
 - **`before-after-text.md`**
   - AI prompt (condensed): "Give me candidate text changes for this audience, then draft the dash04 before-and-after file for the one I pick."
   - Verified: the original text matches the starter; the revised text matches the caption in `dashboard.qmd`; `git diff` against the starter shows changes only to the caption, its comments and the `selected_income` value.

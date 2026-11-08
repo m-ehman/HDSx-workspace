@@ -3,11 +3,13 @@
 
 ## Audience
 
-A public-health analyst preparing a short equity briefing for program managers who are not data specialists. The analyst will copy the dashboard figure into briefing slides, where it will be read without the rest of the dashboard page. The briefing focuses on middle-income adults, the group just above the low-income cut-off.
+A public-health analyst preparing a short equity briefing for program managers who are not data specialists. The analyst will copy the dashboard figure into briefing slides, where it will be read without the rest of the dashboard page. The briefing focuses on middle-income adults, the group between the low- and high-income cut-offs (1.3 and 3.5).
 
 ## Dashboard Question
 
 How has average BMI among middle-income adults aged 20 to 80 changed across NHANES survey waves in the classroom dataset?
+
+**What the submitted view shows:** In this classroom dataset, mean BMI among middle-income adults was 29.0 in 1999-2000 and 30.3 in 2021-2023, with lower values in 2001-2002 (28.3) and 2011-2012 (28.9). This describes the sample only and does not show why BMI differed between survey waves.
 
 ## Control And Visualization
 
@@ -21,7 +23,7 @@ How has average BMI among middle-income adults aged 20 to 80 changed across NHAN
 |---|---|---|
 | Figure caption: "Descriptive, unweighted classroom summary. Missing BMI, income group, cycle, and out-of-cohort ages are excluded." | Six-line figure caption: "Each point is the mean BMI (kg/m²) of more than 1,000 adults in one survey wave (NHANES cycle). Income groups use the family income-to-poverty ratio, with cut-offs at 1.3 and 3.5. The dataset has no 2019-2020 cycle, and the y-axis does not start at 0. Excludes ages outside 20-80 and records missing BMI, income group or cycle. This unweighted, descriptive summary does not give national estimates or show that income causes differences in BMI." | A reader of the slide learns what each point shows, what an NHANES cycle and the income cut-offs mean, that 2019-2020 is missing and the y-axis is zoomed, and the limits of the summary. No analytic logic changed. |
 
-**KT rationale:** Program managers will see this figure in a slide, not on the dashboard page. A caption that explains the measure, the gap and the limits lets them read the pattern correctly without the analyst there, and keeps the limitation attached to the figure.
+**KT rationale:** Program managers will see this figure in a slide, not on the dashboard page. A caption that explains the measure, the gap and the limits lets them read the figure correctly without the analyst there, and keeps the limitation attached to the figure.
 
 ## Test Result
 
@@ -33,4 +35,4 @@ This unweighted, descriptive summary does not give national estimates or show th
 
 ## Privacy Check
 
-The submitted preview shows only the figure: mean BMI by survey cycle for one income group, with no row-level records. Every point averages at least 1,089 adults, so there are no small cells to overclaim. The caption states that the summary is unweighted and descriptive and does not show cause, so the preview makes no causal or population claims.
+The submitted preview shows only the figure: mean BMI by survey cycle for one income group, with no row-level records. Every point, in any income group, averages at least 1,089 adults, so there are no small cells to overclaim. The caption states that the summary is unweighted and descriptive and does not show cause, so the preview makes no causal or population claims.
