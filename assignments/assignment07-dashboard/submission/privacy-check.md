@@ -1,0 +1,3 @@
+# Privacy Check
+
+This dashboard uses the prepared NHANES Health Equity classroom snapshot (`nhanes_equity_v6.csv`), built from public-use CDC NHANES files, and supports descriptive classroom learning only, not population estimates or causal claims. The rendered page and preview show only aggregate counts and mean BMI by survey cycle, with at least 1,089 adults behind each point, so no row-level records or small cells are shown. No row-level records were shared with any external AI tool; Claude saw only the code, excerpts from the course pages, and my rendered aggregate outputs.
