@@ -26,7 +26,7 @@ Tool: Claude, in one claude.ai chat. I shared the A7 brief, excerpts from the We
   - Verified: the control values and fallback order with `sort(unique(na.omit(nhanes$IncomeGroup)))` in R; the Test Result, Limitation and Privacy Check sections against the separate files.
 - **`before-after-text.md`**
   - AI prompt (condensed): "Give me candidate text changes for this audience, then draft the dash04 before-and-after file for the one I pick."
-  - Verified: the original text matches the starter; the revised text matches the caption in `dashboard.qmd`; `git diff` against the starter shows changes only to the caption and its comments.
+  - Verified: the original text matches the starter; the revised text matches the caption in `dashboard.qmd`; `git diff` against the starter shows changes only to the caption, its comments and the `selected_income` value.
 - **`testing-log.md`**
   - AI prompt (condensed): "Draft a testing log for the dash05 six-step routine."
   - Verified: I filled in the titles, mean BMI values and smallest n from my own renders of all three groups.
@@ -47,14 +47,15 @@ Claude reviewed the brief and Week 8 pages, flagged the required structures and 
 - I chose the caption from three candidate changes and added a plain-language meaning for "NHANES cycle" (survey wave), adapted from dash04's label example.
 - I kept the caption right-aligned, ggplot2's default, rather than add a formatting line, so the change stays text-only.
 - I filled in the testing log from my own renders and edited the sentence in the privacy check on what Claude saw.
+- I chose Middle Income as the submitted group instead of the starter’s default, Low Income, and reworded the dashboard question to match.
 - I kept AI-drafted wording only where it matched my rendered output and the A7 brief.
 
 ## How I verified the result
 
 - **Caption claims:** in R, `count(IncomeGroup, Cycle)` for adults aged 20 to 80 with BMI, income group and cycle present gave 11 cycles per group, a smallest n of 1,089, and no 2019-2020 cycle.
 - **Control:** `sort(unique(na.omit(nhanes$IncomeGroup)))` listed the three values in the fallback order.
-- **Renders:** I rendered all three groups and checked the title, table, plot and six caption lines each time, with no warnings. I then reset to Low Income and confirmed it with `git status`.
-- **Analytic logic:** `git diff` against the starter showed changes only inside the Visualization chunk.
+- **Renders:** I rendered all three groups and checked the title, table, plot and six caption lines each time, with no warnings. I then set the submitted value to Middle Income and rendered again.
+- **Analytic logic:** `git diff` against the starter showed changes only to the caption, its comments and the `selected_income` value.
 - **Fresh Codespace:** the submitted file rendered without errors in a new Codespace.
 - **Wording:** I checked that the caption and notes match the output and make no causal, population or row-level claims, as A7's AI-use expectations require.
 - **Privacy:** no row-level data went to AI. Claude saw only the code, excerpts from the course pages and my rendered aggregate outputs.

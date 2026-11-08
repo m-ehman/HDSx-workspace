@@ -3,11 +3,11 @@
 
 ## Audience
 
-A public-health analyst preparing a short equity briefing for program managers who are not data specialists. The analyst will copy the dashboard figure into briefing slides, where it will be read without the rest of the dashboard page.
+A public-health analyst preparing a short equity briefing for program managers who are not data specialists. The analyst will copy the dashboard figure into briefing slides, where it will be read without the rest of the dashboard page. The briefing focuses on middle-income adults, the group just above the low-income cut-off.
 
 ## Dashboard Question
 
-For adults aged 20 to 80 in one income group, how does mean BMI differ across NHANES cycles in the classroom dataset?
+How has average BMI among middle-income adults aged 20 to 80 changed across NHANES survey waves in the classroom dataset?
 
 ## Control And Visualization
 
@@ -25,7 +25,7 @@ For adults aged 20 to 80 in one income group, how does mean BMI differ across NH
 
 ## Test Result
 
-On 2026-11-08, I rendered the dashboard from the repository root with `quarto render assignments/assignment07-dashboard/submission/dashboard.qmd` for `"Low Income (<1.3)"`, `"Middle Income"` and `"High Income (>3.5)"`. Each render finished with no errors or warnings. The title, table and plot updated each time, and the six-line caption stayed in full and held true for every group. The submitted file is set back to `"Low Income (<1.3)"`, and it also rendered in a fresh Codespace. Full results are in `testing-log.md`.
+On 2026-11-08, I rendered the dashboard from the repository root with `quarto render assignments/assignment07-dashboard/submission/dashboard.qmd` for `"Low Income (<1.3)"`, `"Middle Income"` and `"High Income (>3.5)"`. Each render finished with no errors or warnings. The title, table and plot updated each time, and the six-line caption stayed in full and held true for every group. The submitted file is set to `"High Income"`, and it rendered in a fresh Codespace. Full results are in `testing-log.md`.
 
 ## Limitation
 

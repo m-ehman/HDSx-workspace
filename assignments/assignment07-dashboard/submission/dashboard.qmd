@@ -56,7 +56,7 @@ In a Shiny app, this would become a dropdown. In this static starter, change the
 ```{r}
 #| label: dashboard-control
 available_income_groups <- sort(unique(na.omit(nhanes$IncomeGroup)))
-selected_income <- "Low Income (<1.3)"
+selected_income <- "Middle Income"
 
 if (!selected_income %in% available_income_groups) {
   selected_income <- available_income_groups[1]
