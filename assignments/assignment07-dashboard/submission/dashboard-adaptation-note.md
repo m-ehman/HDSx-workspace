@@ -19,16 +19,18 @@ For adults aged 20 to 80 in one income group, how does mean BMI differ across NH
 
 | Original text | Revised text | Why the revision helps |
 |---|---|---|
-|  |  |  |
+| Figure caption: "Descriptive, unweighted classroom summary. Missing BMI, income group, cycle, and out-of-cohort ages are excluded." | Six-line figure caption: "Each point is the mean BMI (kg/m²) of more than 1,000 adults in one survey wave (NHANES cycle). Income groups use the family income-to-poverty ratio, with cut-offs at 1.3 and 3.5. The dataset has no 2019-2020 cycle, and the y-axis does not start at 0. Excludes ages outside 20-80 and records missing BMI, income group or cycle. This unweighted, descriptive summary does not give national estimates or show that income causes differences in BMI." | A reader of the slide learns what each point shows, what an NHANES cycle and the income cut-offs mean, that 2019-2020 is missing and the y-axis is zoomed, and the limits of the summary. No analytic logic changed. |
+
+**KT rationale:** Program managers will see this figure in a slide, not on the dashboard page. A caption that explains the measure, the gap and the limits lets them read the pattern correctly without the analyst there, and keeps the limitation attached to the figure.
 
 ## Test Result
 
-State how the dashboard was run or rendered and what happened.
+On 2026-11-08, I rendered the dashboard from the repository root with `quarto render assignments/assignment07-dashboard/submission/dashboard.qmd` for `"Low Income (<1.3)"`, `"Middle Income"` and `"High Income (>3.5)"`. Each render finished with no errors or warnings. The title, table and plot updated each time, and the six-line caption stayed in full and held true for every group. The submitted file is set back to `"Low Income (<1.3)"`, and it also rendered in a fresh Codespace. Full results are in `testing-log.md`.
 
 ## Limitation
 
-Write one limitation that should appear in or beside the dashboard.
+This unweighted, descriptive summary does not give national estimates or show that income causes differences in BMI. It appears as the last two lines of the figure caption.
 
 ## Privacy Check
 
-State how the submitted preview avoids row-level data, small-cell overclaiming, and causal overclaiming.
+The submitted preview shows only the figure: mean BMI by survey cycle for one income group, with no row-level records. Every point averages at least 1,089 adults, so there are no small cells to overclaim. The caption states that the summary is unweighted and descriptive and does not show cause, so the preview makes no causal or population claims.

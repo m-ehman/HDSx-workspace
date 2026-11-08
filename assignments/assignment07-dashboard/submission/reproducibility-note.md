@@ -1,0 +1,3 @@
+# Reproducibility Note
+
+I rendered the dashboard in GitHub Codespaces from the repository root with `quarto render assignments/assignment07-dashboard/submission/dashboard.qmd`, which writes `dashboard.html` beside the `.qmd`. The data path is relative to the repository root (`examples/nhanes-equity/data/nhanes_equity_v6.csv`), and the workspace `_quarto.yml` sets `execute-dir: project`, so renders run from there. The dashboard needs only the course devcontainer packages (tidyverse and knitr) and no credentials or local-only files. On 2026-11-08, the submitted file also rendered without errors in a fresh Codespace created from `main`, matching `testing-log.md`.
