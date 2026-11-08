@@ -25,7 +25,7 @@ How has average BMI among middle-income adults aged 20 to 80 changed across NHAN
 
 ## Test Result
 
-On 2026-11-08, I rendered the dashboard from the repository root with `quarto render assignments/assignment07-dashboard/submission/dashboard.qmd` for `"Low Income (<1.3)"`, `"Middle Income"` and `"High Income (>3.5)"`. Each render finished with no errors or warnings. The title, table and plot updated each time, and the six-line caption stayed in full and held true for every group. The submitted file is set to `"High Income"`, and it rendered in a fresh Codespace. Full results are in `testing-log.md`.
+On 2026-11-08, I rendered the dashboard from the repository root with `quarto render assignments/assignment07-dashboard/submission/dashboard.qmd` for `"Low Income (<1.3)"`, `"Middle Income"` and `"High Income (>3.5)"`. Each render finished with no errors or warnings. The title, table and plot updated each time, and the six-line caption stayed in full and held true for every group. The submitted file is set to `"Middle Income"`, and it rendered in a fresh Codespace. Full results are in `testing-log.md`.
 
 ## Limitation
 
