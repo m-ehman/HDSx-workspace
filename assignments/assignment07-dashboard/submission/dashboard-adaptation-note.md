@@ -9,7 +9,7 @@ A public-health analyst preparing a short equity briefing for program managers w
 
 How has average BMI among middle-income adults aged 20 to 80 changed across NHANES survey waves in the classroom dataset?
 
-**What the submitted view shows:** In this classroom dataset, mean BMI among middle-income adults was 29.0 in 1999-2000 and 30.3 in 2021-2023, with lower values in 2001-2002 (28.3) and 2011-2012 (28.9). This describes the sample only and does not show why BMI differed between survey waves.
+**What the submitted view shows:** In this classroom dataset, mean BMI among middle-income adults was 29.0 in 1999-2000 and 30.3 in 2021-2023, with dips in 2001-2002 (28.3) and 2011-2012 (28.9). This describes the sample only and does not show why BMI differed between survey waves.
 
 ## Control And Visualization
 
