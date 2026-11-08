@@ -25,4 +25,4 @@ The analyst will paste the figure into slides without the rest of the page, so t
 
 ## Analytic logic
 
-No analytic logic changed: only the caption text was edited, so the filters, summary, plotted values and control are the same as in the starter.
+No analytic logic changed: the only edits to `dashboard.qmd` are the caption text and the R comments recording how it was drafted and checked, so the filters, summary, plotted values and control are the same as in the starter.

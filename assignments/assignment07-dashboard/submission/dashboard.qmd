@@ -94,6 +94,17 @@ kable(dashboard_summary)
 
 ```{r}
 #| label: dashboard-plot
+# Figure (caption revised for A7; text only)
+# AI prompt (condensed from Claude chat): "Rewrite this ggplot2 caption for program managers who
+#   will see the figure in slides. The plot shows mean_bmi (numeric) by Cycle (character, 11 values
+#   from 1999-2000 to 2021-2023, no 2019-2020) for one IncomeGroup ('Low Income (<1.3)', 'Middle
+#   Income' or 'High Income (>3.5)'), adults with Age 20-80 and BMI and Cycle present. Explain the
+#   statistic, NHANES cycle, income cut-offs, missing cycle and zoomed y-axis, and add one
+#   non-causal limitation. One sentence per line, true for every income group."
+# Verified: count(IncomeGroup, Cycle) for adults 20-80 with BMI, IncomeGroup and Cycle present
+#   gives 11 cycles per group, a minimum n of 1,089 and no 2019-2020 cycle; exclusions match
+#   filter() in the Summary chunk; render shows all six caption lines in full and a y-axis that
+#   does not start at 0; no causal or population wording.
 ggplot(dashboard_summary, aes(x = Cycle, y = mean_bmi, group = 1)) +
   geom_line(linewidth = 0.8, color = "#2f6f73") +
   geom_point(size = 2.4, color = "#2f6f73") +
@@ -102,7 +113,15 @@ ggplot(dashboard_summary, aes(x = Cycle, y = mean_bmi, group = 1)) +
     subtitle = "Adults age 20-80 in the prepared NHANES Health Equity classroom dataset",
     x = "NHANES cycle",
     y = "Mean BMI",
-    caption = "Descriptive, unweighted classroom summary. Missing BMI, income group, cycle, and out-of-cohort ages are excluded."
+    caption = paste(
+      "Each point is the mean BMI (kg/m²) of more than 1,000 adults in one survey wave (NHANES cycle).",
+      "Income groups use the family income-to-poverty ratio, with cut-offs at 1.3 and 3.5.",
+      "The dataset has no 2019-2020 cycle, and the y-axis does not start at 0.",
+      "Excludes ages outside 20-80 and records missing BMI, income group or cycle.",
+      "This unweighted, descriptive summary does not give national estimates",
+      "or show that income causes differences in BMI.",
+      sep = "\n"
+    )
   ) +
   theme_minimal(base_size = 12) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
