@@ -7,3 +7,4 @@
   - `"Middle Income"`: title "Mean BMI for Middle Income"; mean BMI 29.0 in 1999-2000 and 30.3 in 2021-2023; smallest n 1,327.
   - `"High Income (>3.5)"`: title "Mean BMI for High Income (>3.5)"; mean BMI 27.9 in 1999-2000 and 29.2 in 2021-2023; smallest n 1,123.
 - **Submitted value:** set to `"Middle Income"` and rendered again, so the submitted file, HTML and preview match.
+- **Fresh Codespace:** I rendered the submitted `"Middle Income"` file in a new Codespace created from `main`. It finished with no errors or warnings, and the figure matched `dashboard-preview.png`.
