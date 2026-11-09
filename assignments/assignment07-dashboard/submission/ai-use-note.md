@@ -22,20 +22,20 @@ Tool: Claude, in one claude.ai chat. I shared the A7 brief, excerpts from the We
 ### Notes without inline comments
 
 - **`dashboard-adaptation-note.md`**
-  - AI prompt (condensed): "Suggest a specific audience and question for the starter dashboard, then draft each template section from my choices and test results."
-  - Verified: the control values and fallback order with `sort(unique(na.omit(nhanes$IncomeGroup)))` in R; the interpretation numbers against my Middle Income render; the Test Result, Limitation and Privacy Check sections against the separate files.
+  - AI prompt (condensed): “Using the A7 template headings, draft an adaptation note for a public-health analyst briefing program managers: the audience, one question the unchanged starter can answer, an accurate description of the `selected_income` control and the chart it updates, and Test Result, Limitation and Privacy Check sections that match my separate files.”
+  - Verified: confirmed the control values and fallback order with `sort(unique(na.omit(nhanes$IncomeGroup)))` in R; checked that the unchanged starter can answer the question; checked the interpretation numbers against my Middle Income render and that its wording is descriptive, with no causal or population claims; checked that the Test Result, Limitation and Privacy Check sections match the separate files.
 - **`before-after-text.md`**
-  - AI prompt (condensed): "Give me candidate text changes for this audience, then draft the dash04 before-and-after file for the one I pick."
-  - Verified: the original text matches the starter; the revised text matches the caption in `dashboard.qmd`; `git diff` against the starter shows changes only to the caption, its comments and the `selected_income` value.
+  - AI prompt (condensed): “List three audience-facing text elements in the starter that could be clearer for program managers reading the figure on a slide, without changing analytic logic. For the one I choose, draft the dash04 record: original and revised text verbatim, one sentence on why it helps, and one confirming no analytic logic changed.”
+  - Verified: confirmed the original text matches the starter and the revised text matches the caption in `dashboard.qmd` word for word; checked that the file has dash04's four parts; checked that the revised caption makes no causal or population claims; `git diff` against the starter shows changes only to the caption, its comments and the `selected_income` value.
 - **`testing-log.md`**
-  - AI prompt (condensed): "Draft a testing log for the dash05 six-step routine."
-  - Verified: I filled in the titles, mean BMI values and smallest n from my own renders of all three groups.
+  - AI prompt (condensed): “Following the dash05 routine, draft a testing log with the date, render command, each `selected_income` value tried and what updated, leaving blanks for my results.”
+  - Verified: filled in the titles, mean BMI values and smallest n from my own renders of all three groups, and the fresh Codespace result from my own render; confirmed the log covers the date, command, values tried and results the brief asks for.
 - **`limitation-note.md` and `privacy-check.md`**
-  - AI prompt (condensed): "Draft one limitation sentence that matches the caption, and three privacy sentences covering dash05 and the README."
-  - Verified: the limitation sentence matches the caption word for word; the smallest n (1,089) comes from my three renders.
+  - AI prompt (condensed): “Draft one limitation sentence identical to the caption’s last sentence. Then draft three privacy sentences covering dash05 (data source and classroom boundary, aggregate-only output, no row-level data shared with AI) and the README (no row-level data, small cells or causal claims).”
+  - Verified: confirmed the limitation is one sentence, matches the caption word for word, and makes no causal or population claim; confirmed `privacy-check.md` has three sentences covering the dash05 and README points; took the smallest n (1,089) from my three renders; confirmed the sentence on AI sharing is accurate.
 - **`reproducibility-note.md`**
-  - AI prompt (condensed): "Draft one paragraph naming the render command, relative data path and fresh Codespace result."
-  - Verified: the command and path match `testing-log.md`; I rendered the submitted file in a new Codespace.
+  - AI prompt (condensed): “Draft one paragraph stating the render command, the relative data path, the packages needed, and confirming the file renders in a fresh Codespace.”
+  - Verified: confirmed the command and relative path match `testing-log.md` and the Setup chunk; checked that tidyverse and knitr are the only packages loaded; rendered the submitted file in a new Codespace.
 
 ## What AI helped with
 
@@ -58,4 +58,4 @@ Claude reviewed the brief and Week 8 pages, flagged the required structures and 
 - **Analytic logic:** `git diff` against the starter showed changes only to the caption, its comments and the `selected_income` value.
 - **Fresh Codespace:** the submitted file rendered without errors in a new Codespace.
 - **Wording:** I checked that the caption and notes match the output and make no causal, population or row-level claims, as A7's AI-use expectations require.
-- **Privacy:** no row-level data went to AI. Claude saw only the code, excerpts from the course pages and my rendered aggregate outputs.
+- **Privacy:** I did not share row-level data with any AI tool. Claude saw only the code, excerpts from the course pages and my rendered aggregate outputs.
