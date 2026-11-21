@@ -1,6 +1,6 @@
 ---
-title: "Three-Slide KT Story"
-author: "Student Name"
+title: "Average BMI in Middle-Income Adults"
+author: "Morgan Ehman"
 format:
   revealjs:
     slide-number: true
@@ -10,24 +10,29 @@ bibliography: ../../../references.bib
 
 ## Question And Audience
 
-**Audience:** Name the group that needs this result.
+**Audience:** Public health program managers who are not data specialists, receiving a short equity briefing on middle-income adults.
 
-**Question:** State one focused question.
+**Question:** How did average body mass index (BMI) among middle-income adults aged 20 to 80 differ across NHANES survey waves in the classroom dataset?
 
-**Why it matters:** Explain the practical decision or conversation this result supports.
+**Why it matters:** Program managers need a clear picture of what this data does and does not show before deciding whether to look into it further.
 
 ## Evidence
 
-Insert one figure or table from prior work.
+![Source: prepared classroom snapshot derived from CDC/NCHS NHANES public-use data [@cdc-nhanes]. Results are descriptive and unweighted.](../../assignment07-dashboard/submission/dashboard-preview.png){.r-stretch}
 
-State the finding in one sentence.
+## Takeaway
 
-Source note: CDC/NCHS NHANES public-use data are the source for the NHANES classroom example [@cdc-nhanes].
+In this classroom dataset, middle-income adults surveyed in 2021-2023 had a higher average BMI (30.3) than those surveyed in 1999-2000 (29.0).
 
 ## Limitation And Next Step
 
-**Limitation:** State what the evidence cannot prove.
+**Limitation:** This unweighted, descriptive summary does not give national estimates or show why average BMI differed between survey waves.
 
-**Next step:** Name one action, discussion, or analysis that should follow.
+**Next step:** Before using these results in planning, ask for an analysis that uses the NHANES survey weights, which adjust for how people were chosen for the survey, so the averages can represent US adults.
 
-**AI-use note:** State whether AI helped draft or revise the slide wording and what you checked.
+**AI-use note:** AI (Claude) helped draft and simplify the slide wording. I checked each number against the A7 dashboard figure and took the limitation from my A7 work.
+
+## References
+
+::: {#refs}
+:::
