@@ -1,0 +1,33 @@
+---
+title: "Three-Slide KT Story"
+author: "Student Name"
+format:
+  revealjs:
+    slide-number: true
+    embed-resources: true
+bibliography: ../../../references.bib
+---
+
+## Question And Audience
+
+**Audience:** Name the group that needs this result.
+
+**Question:** State one focused question.
+
+**Why it matters:** Explain the practical decision or conversation this result supports.
+
+## Evidence
+
+Insert one figure or table from prior work.
+
+State the finding in one sentence.
+
+Source note: CDC/NCHS NHANES public-use data are the source for the NHANES classroom example [@cdc-nhanes].
+
+## Limitation And Next Step
+
+**Limitation:** State what the evidence cannot prove.
+
+**Next step:** Name one action, discussion, or analysis that should follow.
+
+**AI-use note:** State whether AI helped draft or revise the slide wording and what you checked.
