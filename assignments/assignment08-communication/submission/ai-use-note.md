@@ -2,7 +2,7 @@
 
 ## Audit trail
 
-Tool: Claude, in one claude.ai chat. I shared the A8 brief, the three A8 starter files, my A7 submissions in my repository, and my classmate's feedback. The prompts below are condensed from that chat.
+Tool: Claude, in one claude.ai chat. I shared the A8 brief, some week 9 textbook pages, the three A8 starter files, my A7 submissions in my repository, and my classmate's feedback. The prompts below are condensed from that chat.
 
 - **`slides.qmd` (slide wording)**
   - AI prompt (condensed): “Context: an A8 slide deck built from one figure, a line chart of mean BMI by NHANES cycle for middle-income adults aged 20 to 80 (29.0 in 1999-2000, 30.3 in 2021-2023, dips to 28.3 in 2001-2002 and 28.9 in 2011-2012). Original: the placeholder text in `starter-slides.qmd`. Audience: public health program managers who are not data specialists. Task: fill the starter slides with an audience, a question, a why-it-matters line, a one-sentence takeaway, a limitation and a next step. Rules: reuse my A7 wording where it fits, describe only what the figure shows, compare two survey waves rather than claim a trend, and make no causal or population claims.”
@@ -22,7 +22,7 @@ Tool: Claude, in one claude.ai chat. I shared the A8 brief, the three A8 starter
 
 ## What AI helped with
 
-Claude reviewed the brief, flagged the required structures agreed on using the A7 figure as evidence. It drafted the first pass of the slide wording, the plain-language summary, the source note, and a draft of this note. Claude also rendered copies of my slides to check the layout, made a PDF of the deck for my reviewer, and suggested a revision from her feedback.
+Claude reviewed the brief, flagged the required structures and suggested the A7 figure as evidence. It drafted the first pass of the slide wording, the plain-language summary, the source note, and a draft of this note. Claude also rendered copies of my slides to check the layout, made a PDF of the deck for my reviewer, and suggested a revision from her feedback.
 
 ## What I changed
 

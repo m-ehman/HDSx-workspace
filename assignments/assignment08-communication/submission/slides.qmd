@@ -14,7 +14,7 @@ bibliography: ../../../references.bib
 
 **Question:** How did average body mass index (BMI) among middle-income adults aged 20 to 80 differ across NHANES survey waves in the classroom dataset?
 
-**Why it matters:** Program managers need a clear picture of what this data does and does not show before deciding whether to look into it further.
+**Why it matters:** The answer can help program managers decide whether to include middle-income adults when planning healthy-weight programs.
 
 ## Evidence
 
