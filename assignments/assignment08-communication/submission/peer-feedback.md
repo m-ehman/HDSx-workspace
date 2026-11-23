@@ -13,6 +13,6 @@ Feedback was collected using the comm04 feedback table.
 | Source note or citation shown | Source is the classroom snapshot of the NHANES data, and the full survey name is included in the references. |
 | Wording that needs plain-language revision | Survey waves and unweighted might be a little jargony. Public health program managers with a little bit of data familiarity would likely understand, though. |
 | Accessibility issue, if any | The line is clear, but I'd struggle to read the years and the little paragraph underneath it during a talk. That's the one slide where I'd want to zoom in. That's important given the caption includes important information to interpreting the figure (e.g., the truncated y-axis). |
-| One concrete improvement before submission | I'd include a caution somewhere noting that these are not necessarily the same people being surveyed and or that the y axis is truncated. |
+| One concrete improvement before submission | I'd include a caution somewhere noting that these are not necessarily the same people being surveyed and that the y axis is truncated. |
 
 **Revision made:** Following the reviewer's suggested improvement, I added to the limitation on slide 5 that each survey wave included different people and that the graph's y-axis does not start at 0.

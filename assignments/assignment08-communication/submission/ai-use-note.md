@@ -29,7 +29,7 @@ Claude reviewed the brief, flagged the required structures and suggested the A7 
 - I chose the A7 figure, the revealjs deck and program managers as the audience.
 - Claude first suggested a caution line under the takeaway. I moved it into the limitation on slide 5 instead, so each slide covers one part of the story.
 - I shortened my reviewer's improvement row to one item, with her agreement.
-- I reviewed all of Claude's suggeste wording and drafts and made minor edits to wording for clarity and tone.
+- I reviewed all of Claude's suggested wording and drafts and made minor edits to wording for clarity and tone.
 
 ## How I verified the result
 
